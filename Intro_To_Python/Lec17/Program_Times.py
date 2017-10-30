@@ -11,7 +11,7 @@ def time_find_two_smallest(find_func, lst):
     t1 = time.perf_counter()
     find_func(lst)
     t2 = time.perf_counter()
-    return (t2 -t1) * 1000.
+    return (t2 - t1) * 1000.
 
 
 if __name__ == '__main__':
