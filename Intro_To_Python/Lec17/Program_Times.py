@@ -21,9 +21,9 @@ if __name__ == '__main__':
     for line in sea_levels_file:
         sea_levels.append(float(line))
     # Time each of the approaches
-    find_remove_find_time= time_find_two_smallest(find_remove_find5.find_two_smallest, sea_levels)
-    sort_get_minimums_time= time_find_two_smallest(sort_then_find3.find_two_smallest, sea_levels)
-    walk_through_time= time_find_two_smallest(walk_through7.find_two_smallest, sea_levels)
+    find_remove_find_time = time_find_two_smallest(find_remove_find5.find_two_smallest, sea_levels)
+    sort_get_minimums_time = time_find_two_smallest(sort_then_find3.find_two_smallest, sea_levels)
+    walk_through_time = time_find_two_smallest(walk_through7.find_two_smallest, sea_levels)
     print('"Find, remove, find" took {:.2f}ms.'.format(find_remove_find_time))
     print('"Sort, get minimums" took {:.2f}ms.'.format(sort_get_minimums_time))
     print('"Walk through the list" took {:.2f}ms.'.format(walk_through_time))
