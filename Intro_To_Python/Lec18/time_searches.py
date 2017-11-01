@@ -2,6 +2,8 @@ import time
 import linear_search_1
 import linear_search_2
 import linear_search_3
+
+
 def time_it(search, L, v):
     """ (function, object, list) -> number
     Time how long it takes to run function search to find
@@ -11,6 +13,8 @@ def time_it(search, L, v):
     search(L, v)
     t2 = time.perf_counter()
     return (t2 -t1) * 1000.0
+
+
 def print_times(v, L):
     """ (object, list) -> NoneType
     Print the number of milliseconds it takes for linear_search(v, L)
