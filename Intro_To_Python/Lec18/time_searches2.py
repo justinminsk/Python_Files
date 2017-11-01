@@ -28,7 +28,7 @@ def print_times(v, L):
     for_time= time_it(linear_search_2.linear_search, L, v)
     sentinel_time= time_it(linear_search_3.linear_search, L, v)
     Bin_time= time_it(binary_search1.binary_search, L, v)
-    print("{0}\t{1:>8.1f}\t{2:>8.1f}\t{3:>8.1f}\t{4:>8.1f}\t{5:>8.1f}".format(
+    print("{0}\t\t{1:>8.1f}\t\t{2:>8.1f}\t\t{3:>8.1f}\t\t{4:>8.1f}\t\t{5:>8.1f}".format(
         v, while_time, for_time, sentinel_time, Bin_time, index_time))
 
 
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     ListLength= 10000001 # default: 10,000,001
     L = list(range(ListLength)) # A list of variable length
     print('Search times in a list of ', "{:,}".format(ListLength))
-    print('Index\t while\t for\t Sent\t BinS\t .index ')
+    print('Index\t\t while\t\t for\t\t Sent\t\t BinS\t\t .index ')
     print_times(10, L)  # How fast is it to search near the beginning?
     print_times(round(ListLength / 2), L)  # How fast is it to search near the middle?
     print_times(ListLength - 50, L)  # How fast is it to search near the end?
