@@ -11,10 +11,6 @@ def get_from_grid(item):
 def get_distance(start_location, end_location):
     """set -> float
     Finds the distance between two points in our grid.
-    >>>get_distance('cheese', 'pork')
-    5.0
-    >>>get_distance('cheese', 'laundry detergent')
-    10.0
     """
     coord1 = get_from_grid(start_location)
     coord_x1 = coord1[0]
@@ -22,7 +18,13 @@ def get_distance(start_location, end_location):
     coord2 = get_from_grid(end_location)
     coord_x2 = coord2[0]
     coord_y2 = coord2[1]
-    distance = ((coord_x1 - coord_x2)**2 + (coord_y1 - coord_y2)**2)**0.5
+    if coord_x2 == coord_x1:
+        distance = ((coord_x1 - coord_x2)**2 + (coord_y1 - coord_y2)**2)**0.5
+    else:
+        if coord_y1 > 4:
+            distance = (10 - coord_y1) + abs(coord_x2 - coord_x1) + (10 - coord_y2)
+        if coord_y1 <= 4:
+            distance = coord_y1 + abs(coord_x2 - coord_x1) + coord_y2
     return distance
 
 
@@ -56,6 +58,9 @@ def tsp(start_item, gl):
             if distance < smallest_distance:
                 smallest_distance = distance
                 next_item = item
+    if smallest_distance == 100000:
+        smallest_distance = 0
+    print(smallest_distance)
     return next_item
 
 
@@ -71,8 +76,8 @@ def tsp_greedy(gl):
     end_list = []
     while len(g_list) > 0:
         end_list.append(item)
-        item = tsp(item, g_list)
         g_list.remove(item)
+        item = tsp(item, g_list)
     return end_list
 
 
