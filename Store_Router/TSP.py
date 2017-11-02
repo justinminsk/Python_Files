@@ -27,6 +27,9 @@ def get_distance(start_location, end_location):
 
 
 def grocery_list(gl):
+    """text doc -> list
+    Takes a text document list with one item per a line and makes into a list or strings.
+    """
     import Grid_Creator
     grid = Grid_Creator.grid()
     end_list = []
@@ -39,9 +42,9 @@ def grocery_list(gl):
     return end_list
 
 
-def tsp_s(start_item, gl):
+def tsp(start_item, gl):
     """string -> string
-    A greedy algorithm of the traveling salesmen problem
+    Part of the greedy tsp algorithm comparing the distances form location to next location.
     """
     smallest_distance = 100000
     next_item = ''
@@ -56,35 +59,21 @@ def tsp_s(start_item, gl):
     return next_item
 
 
-def tsp_int(start_item, gl):
-    """string -> string
-    A greedy algorithm of the traveling salesmen problem
-    """
-    smallest_distance = 100000
-    for item in gl:
-        if item == start_item:
-            continue
-        else:
-            distance = get_distance(start_item, item)
-            if distance < smallest_distance:
-                smallest_distance = distance
-    return smallest_distance
-
-
 def tsp_greedy(gl):
+    """string -> list
+     Greedy tsp algorithm, finding the shortest distance at each interval.
+    """
     g_list = grocery_list(gl)
     entrance = 'entrance'
     g_list.insert(0, entrance)
-    total_distance = tsp_int(g_list[0], g_list)
-    item = tsp_s(g_list[0], g_list)
+    item = tsp(g_list[0], g_list)
     g_list.remove('entrance')
+    end_list = []
     while len(g_list) > 0:
-        distance = tsp_int(item, g_list)
+        end_list.append(item)
+        item = tsp(item, g_list)
         g_list.remove(item)
-        total_distance += distance
-        print(item)
-        item = tsp_s(item, g_list)
-    return total_distance
+    return end_list
 
 
 if __name__ == '__main__':

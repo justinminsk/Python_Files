@@ -26,10 +26,10 @@ def grid_id(grid_measurements):
     for mesurement in grid_measurements:
         if count <= 9:
             store_id.append(count)
+            count += 1
         else:
             count = 1
             store_id.append(count)
-        count += 1
     return store_id
 
 
