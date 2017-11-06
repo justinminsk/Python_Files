@@ -60,7 +60,6 @@ def tsp(start_item, gl):
                 next_item = item
     if smallest_distance == 100000:
         smallest_distance = 0
-    print(smallest_distance)
     return next_item
 
 
