@@ -80,5 +80,22 @@ def tsp_greedy(gl):
     return end_list
 
 
+def make_distance_matrix():
+    end_matrix = []
+    import Grid_Creator
+    grid = Grid_Creator.grid()
+    for key in grid:
+        temp_list = []
+        for item in grid:
+            temp_list.append(get_distance(key, item))
+        end_matrix.append(temp_list)
+    return end_matrix
+
+
+def use_tsp_solver():
+    from tsp_solver.greedy import solve_tsp
+    print(solve_tsp(make_distance_matrix()))
+
+
 if __name__ == '__main__':
-    print(tsp_greedy('grocer_list.txt'))
+    use_tsp_solver()

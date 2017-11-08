@@ -13,7 +13,7 @@ def grid_measurements():
     """() -> 2d array
     Create a store array to use in store router program. This creates a list of measurements.
     """
-    store_mesurements = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+    store_mesurements = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6]
     return store_mesurements
 
 
