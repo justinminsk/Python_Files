@@ -98,4 +98,4 @@ def use_tsp_solver():
 
 
 if __name__ == '__main__':
-    use_tsp_solver()
+    print(tsp_greedy('grocer_list.txt'))
