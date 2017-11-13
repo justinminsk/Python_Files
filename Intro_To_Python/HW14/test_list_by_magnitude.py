@@ -48,8 +48,8 @@ class Test_list_mag(unittest.TestCase):
 
     def test_running_list_mag_mix(self):  # 7
         """Test a list containing mixture of negative values, zeros and positive values."""
-        argument = [-2, -1, 2, 3, -5, 4]
-        expected = [-1, -2, 2, 3, 4, -5]
+        argument = [-2, -1, 2, 3, -5, 4, 2, -2, -4]
+        expected = [-1, -2, -2, 2, 2, 3, -4, 4, -5]
         ibm.list_by_mag(argument)
         self.assertEqual(expected, argument, "The list contains a mixture of negative values, zeros and positive values"
                                              ".")
