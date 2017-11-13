@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./codehilite.css">
+</head>
+
+<h1>Markdown in a Python Shell</h1>
+<p>Markdown can be writen in a python shell and the code can be turned into a python block with a 4 space indention.
+This is all done with the markdown package. For example:</p>
+<div class="codehilite"><pre><span></span>python_string = &#39;Hello World&#39;
+print(python_string)
+</pre></div>
+
+
+<p>The problem with doing it in the shell is that while converting to html is easy with the cmd line:</p>
+<div class="codehilite"><pre><span></span>python -m markdown -x codehilite some_markdown.md &gt; body.html
+</pre></div>
+
+
+<p>or:</p>
+<div class="codehilite"><pre><span></span>python -m markdown input.md &gt; output.html
+</pre></div>
+
+
+<p>It does not run the code like an RMarkdown file does with R and knitr. My previous post call Pokemon shows is done in 
+this manner since as I will show with the next post RMarkdown would not work for a full exploratory analysis like my 
+Pokemon project, even thou it can run blocks of python.</p>
+</body>
+</html>

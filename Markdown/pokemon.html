@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./codehilite.css">
+</head>
+
+<body>
+<h1>How to run the code</h1>
+<p>To run the code you should use anaconda3 or jupyter notebook with python 3. You will also need numpy, pandas, matplotlib, seaborn, and pylab libraries for python.</p>
+<h1>A Look at Pokemon by Generation</h1>
+<p>Pokemon became a sensation in the 1990's and continues to be a popular franchise to this date.
+Pokemon the video game has evolved (pun intended) over the decades into a complex game that takes
+a lot of statistics and analyze to create teams that can win the meta at tournaments. The point
+of this kernal is to look at the Pokemon by generation and see if we can find any insight into
+the numbers behind the design.</p>
+<h1>An Example of a Pokemon</h1>
+<p>This is Pickachu the franchises mascot.</p>
+<p><img alt="alt text" src="https://cdn.bulbagarden.net/upload/2/28/Spr_6o_025_C.png" /></p>
+<p>This is Pickachu in our data.</p>
+<div class="codehilite"><pre><span></span>pokemon.iloc[30]
+</pre></div>
+
+
+<h1>25</h1>
+<p>Name           Pikachu</p>
+<p>Type 1        Electric</p>
+<p>Type 2             NaN</p>
+<p>Total              320</p>
+<p>HP                  35</p>
+<p>Attack              55</p>
+<p>Defense             40</p>
+<p>Sp. Atk             50</p>
+<p>Sp. Def             50</p>
+<p>Speed               90</p>
+<p>Generation           1</p>
+<p>Legendary        False</p>
+<p>Name: 30, dtype: object</p>
+<h1>A Look at Every Generation</h1>
+<p>Looking at all the generations at once we can create a control that we can compare to the
+other datasets. Here we make a Pearson correlation chart to see the correlations and create
+a histogram for each variable to see distribution and other useful information.</p>
+<p>To start looking at the data first you need to upload libraries.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="c1">#import libraries</span>
+</pre></div>
+
+
+<p>Then import the data.</p>
+<div class="codehilite"><pre><span></span><span class="n">pokemon</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Pokemon.csv&#39;</span><span class="p">)</span>
+<span class="c1">#import data</span>
+</pre></div>
+
+
+<p>Now we can graph the data.</p>
+<div class="codehilite"><pre><span></span>#Looking at the breakdown of type 1
+type_count = pd.value_counts(pokemon[&#39;Type 1&#39;], sort = True).sort_index()
+labels = [&#39;Bug&#39;, &#39;Dark&#39;, &#39;Dragon&#39;, &#39;Electric&#39;, &#39;Fariy&#39;, &#39;Fighting&#39;, &#39;Fire&#39;,
+        &#39;Flying&#39;, &#39;Ghost&#39;, &#39;Grass&#39;, &#39;Ground&#39;, &#39;Ice&#39;, &#39;Normal&#39;, &#39;Poison&#39;, &#39;Psychic&#39;,
+        &#39;Rock&#39;, &#39;Steel&#39;, &#39;Water&#39;]
+sizes = type_count
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels = labels, startangle=90)
+ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+plt.title(&#39;Number of Pokemon by type 1&#39;)
+#plt.savefig(&#39;pie1.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+
+
+
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data&#39;, y = 1.05, size = 15)
+sns.heatmap(pokemon.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+sns.plt.show()
+#color map looking at Pearson correlations
+</pre></div>
+
+
+<p>As we can see sp. def and defense as well as sp. attack and sp. def have some of
+the strongest correlations.</p>
+<div class="codehilite"><pre><span></span>pokemon.hist()
+fig=plt.gcf()
+fig.set_size_inches(20,15)
+plt.show()
+#histograms of the different stats to show if they have normal distribution
+</pre></div>
+
+
+<p>Attack, Defense, HP, Sp. Atk, Sp. Def, and Speed have decent distributions.</p>
+<h1>Generation 1</h1>
+<div class="codehilite"><pre><span></span>df1 = pokemon[pokemon.Generation == 1]
+#look at just first generation pokemon
+
+#Looking at the breakdown of type 1
+type_count = pd.value_counts(df1[&#39;Type 1&#39;], sort = True).sort_index()
+#print(type_count)
+labels = [&#39;Bug&#39;, &#39;Dragon&#39;, &#39;Electric&#39;, &#39;Fariy&#39;, &#39;Fighting&#39;, &#39;Fire&#39;,
+        &#39;Ghost&#39;, &#39;Grass&#39;, &#39;Ground&#39;, &#39;Ice&#39;, &#39;Normal&#39;, &#39;Poison&#39;, &#39;Psychic&#39;,
+        &#39;Rock&#39;,  &#39;Water&#39;]
+sizes = type_count
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels = labels, startangle=90)
+ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+plt.title(&#39;Number of Pokemon by type 1&#39;)
+#plt.savefig(&#39;pie2.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+
+
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data&#39;, y = 1.05, size = 15)
+sns.heatmap(df1.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+plt.savefig(&#39;heat2.png&#39;, bbox_inches=&#39;tight&#39;)
+sns.plt.show()
+#color map looking at Pearson correlations
+</pre></div>
+
+
+<p>Here we can see that sp. attack and sp. def have the highest correlation, even higher then our control. This means in gen one sp. attack and sp. def tended to go hand in hand.</p>
+<div class="codehilite"><pre><span></span>df1.hist()
+fig=plt.gcf()
+fig.set_size_inches(20,15)
+plt.savefig(&#39;hist2.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+#histograms of the different stats to show if they have normal distribution
+</pre></div>
+
+
+<p>Attack, Defense, HP, Sp. Atk, and Speed have decent distributions.</p>
+<h1>Generation 2</h1>
+<div class="codehilite"><pre><span></span>df1 = pokemon[pokemon.Generation == 2]
+#look at gen 2 pokemon
+
+#Looking at the breakdown of type 1
+type_count = pd.value_counts(df1[&#39;Type 1&#39;], sort = True).sort_index()
+#print(type_count)
+labels = [&#39;Bug&#39;, &#39;Dark&#39;, &#39;Electric&#39;, &#39;Fariy&#39;, &#39;Fighting&#39;, &#39;Fire&#39;,
+         &#39;Ghost&#39;, &#39;Grass&#39;, &#39;Ground&#39;, &#39;Ice&#39;, &#39;Normal&#39;, &#39;Poison&#39;, &#39;Psychic&#39;,
+        &#39;Rock&#39;, &#39;Steel&#39;, &#39;Water&#39;]
+sizes = type_count
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels = labels, startangle=90)
+ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+plt.title(&#39;Number of Pokemon by type 1&#39;)
+#plt.savefig(&#39;pie3.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+
+
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data&#39;, y = 1.05, size = 15)
+sns.heatmap(df1.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+plt.savefig(&#39;heat3.png&#39;, bbox_inches=&#39;tight&#39;)
+sns.plt.show()
+#color map looking at Pearson correlations
+</pre></div>
+
+
+<p>In gen two it seems that the two def stats (sp. def and defense) correlate best, but we see that sp. def and sp. attack correlation almost completely drops off compared to our control and gen one.
+The other new trend is between attack and defense which have a strong correlation compared to the rest of the stats.</p>
+<div class="codehilite"><pre><span></span>df1.hist()
+fig=plt.gcf()
+fig.set_size_inches(20,15)
+plt.savefig(&#39;hist3.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+#histograms of the different stats to show if they have normal distribution
+</pre></div>
+
+
+<p>This generation does not have normal distributions.</p>
+<h1>Generation 3</h1>
+<div class="codehilite"><pre><span></span>df1 = pokemon[pokemon.Generation == 3]
+#look at gen 3 pokemon
+
+#Looking at the breakdown of type 1
+type_count = pd.value_counts(df1[&#39;Type 1&#39;], sort = True).sort_index()
+#print(type_count)
+labels = [&#39;Bug&#39;, &#39;Dark&#39;,  &#39;Electric&#39;, &#39;Fariy&#39;, &#39;Fighting&#39;, &#39;Fire&#39;,
+        &#39;Ghost&#39;, &#39;Grass&#39;, &#39;Ground&#39;, &#39;Ice&#39;, &#39;Normal&#39;, &#39;Poison&#39;, &#39;Psychic&#39;,
+        &#39;Rock&#39;, &#39;Steel&#39;, &#39;Water&#39;]
+sizes = type_count
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels = labels, startangle=90)
+ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+plt.title(&#39;Number of Pokemon by type 1&#39;)
+#plt.savefig(&#39;pie4.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data&#39;, y = 1.05, size = 15)
+sns.heatmap(df1.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+plt.savefig(&#39;heat4.png&#39;, bbox_inches=&#39;tight&#39;)
+sns.plt.show()
+#color map looking at Pearson correlations
+</pre></div>
+
+
+<p>This gen (gen three) has a crazy high correlation between sp. atk and attack. Speed and sp atk also have high correlation which is a new correlation. This could be a generation that you would leave out for trying to predict type off of stats. The trend with the defenses (sp. def and defense) contiue also.</p>
+<div class="codehilite"><pre><span></span>df1.hist()
+fig=plt.gcf()
+fig.set_size_inches(20,15)
+plt.savefig(&#39;hist4.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+#histograms of the different stats to show if they have normal distribution
+</pre></div>
+
+
+<h1>Generation 4</h1>
+<div class="codehilite"><pre><span></span>df1 = pokemon[pokemon.Generation == 4]
+#look at gen 4 pokemon
+
+
+#Looking at the breakdown of type 1
+type_count = pd.value_counts(df1[&#39;Type 1&#39;], sort = True).sort_index()
+#print(type_count)
+labels = [&#39;Bug&#39;, &#39;Dark&#39;, &#39;Dragon&#39;, &#39;Electric&#39;, &#39;Fariy&#39;, &#39;Fighting&#39;, &#39;Fire&#39;,
+        &#39;Ghost&#39;, &#39;Grass&#39;, &#39;Ground&#39;, &#39;Ice&#39;, &#39;Normal&#39;, &#39;Poison&#39;, &#39;Psychic&#39;,
+        &#39;Rock&#39;, &#39;Steel&#39;, &#39;Water&#39;]
+sizes = type_count
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels = labels, startangle=90)
+ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+plt.title(&#39;Number of Pokemon by type 1&#39;)
+#plt.savefig(&#39;pie5.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+
+
+
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data&#39;, y = 1.05, size = 15)
+sns.heatmap(df1.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+plt.savefig(&#39;heat5.png&#39;, bbox_inches=&#39;tight&#39;)
+sns.plt.show()
+#color map looking at Pearson correlations
+</pre></div>
+
+
+<p>Here we have the correlation out of all the gens. At a 71% correlation defense and sp. def in this generation should be the same or close to the same number. Here we also see a correlation between hp and attack which is a different trend compared to other gens.</p>
+<div class="codehilite"><pre><span></span>df1.hist()
+fig=plt.gcf()
+fig.set_size_inches(20,15)
+plt.savefig(&#39;hist5.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+#histograms of the different stats to show if they have normal distribution
+</pre></div>
+
+
+<p>Attack has decent distribution.</p>
+<h1>Generation 5</h1>
+<div class="codehilite"><pre><span></span>df1 = pokemon[pokemon.Generation == 5]
+#look at gen 5 pokemon
+
+#Looking at the breakdown of type 1
+type_count = pd.value_counts(df1[&#39;Type 1&#39;], sort = True).sort_index()
+#print(type_count)
+labels = [&#39;Bug&#39;, &#39;Dark&#39;, &#39;Dragon&#39;, &#39;Electric&#39;,  &#39;Fighting&#39;, &#39;Fire&#39;,
+        &#39;Flying&#39;, &#39;Ghost&#39;, &#39;Grass&#39;, &#39;Ground&#39;, &#39;Ice&#39;, &#39;Normal&#39;, &#39;Poison&#39;, &#39;Psychic&#39;,
+        &#39;Rock&#39;, &#39;Steel&#39;, &#39;Water&#39;]
+sizes = type_count
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels = labels, startangle=90)
+ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+plt.title(&#39;Number of Pokemon by type 1&#39;)
+#plt.savefig(&#39;pie6.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data&#39;, y = 1.05, size = 15)
+sns.heatmap(df1.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+plt.savefig(&#39;heat6.png&#39;, bbox_inches=&#39;tight&#39;)
+sns.plt.show()
+#color map looking at Pearson correlations
+</pre></div>
+
+
+<p>This generation we see a come back of sp. atk and sp. def correlation, we also still have an unsually high correlation of sp. def and defense. The trend form last gen (gen 4) of attack and hp contiues as well.</p>
+<div class="codehilite"><pre><span></span>df1.hist()
+fig=plt.gcf()
+fig.set_size_inches(20,15)
+plt.savefig(&#39;hist6.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+#histograms of the different stats to show if they have normal distribution
+</pre></div>
+
+
+<p>Attack and HP have decent distributions.</p>
+<h1>Generation 6</h1>
+<div class="codehilite"><pre><span></span>df1 = pokemon[pokemon.Generation == 6]
+#look at gen 6 pokemon
+
+
+#Looking at the breakdown of type 1
+type_count = pd.value_counts(df1[&#39;Type 1&#39;], sort = True).sort_index()
+#print(type_count)
+labels = [&#39;Bug&#39;, &#39;Dark&#39;, &#39;Dragon&#39;, &#39;Electric&#39;, &#39;Fariy&#39;, &#39;Fighting&#39;, &#39;Fire&#39;,
+        &#39;Flying&#39;, &#39;Ghost&#39;, &#39;Grass&#39;,  &#39;Ice&#39;, &#39;Normal&#39;, &#39;Poison&#39;, &#39;Psychic&#39;,
+        &#39;Rock&#39;, &#39;Steel&#39;, &#39;Water&#39;]
+sizes = type_count
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels = labels, startangle=90)
+ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+plt.title(&#39;Number of Pokemon by type 1&#39;)
+#plt.savefig(&#39;pie7.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+
+
+
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data&#39;, y = 1.05, size = 15)
+sns.heatmap(df1.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+plt.savefig(&#39;heat7.png&#39;, bbox_inches=&#39;tight&#39;)
+sns.plt.show()
+#color map looking at Pearson correlations
+</pre></div>
+
+
+<p>The trends in gen 6 are speed and sp atk, sp. def, and sp. atk, attack and sp atk, and attack and hp.</p>
+<div class="codehilite"><pre><span></span>df1.hist()
+fig=plt.gcf()
+fig.set_size_inches(20,15)
+plt.savefig(&#39;hist7.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+#histograms of the different stats to show if they have normal distribution
+</pre></div>
+
+
+<p>Attack, Defense, and HP have decent distributions.</p>
+<h1>Conclusion</h1>
+<p>Each gen has its' own unique correlations and trends. This means that if you want to find a strong tank Pokemon (high hp, sp. def, defence) you might look at gen 4 with a 71% correlation between sp. def and defence. The next varible to look at would be legendary which might skew the data.</p>
+<h1>Looking at Pokemon without Legendaries</h1>
+<div class="codehilite"><pre><span></span>df1 = pokemon[&#39;Legendary&#39;].map(lambda x: x == 0)
+df1 = pokemon[df1]
+#get the data without legendaries
+
+#Looking at the breakdown of type 1
+type_count = pd.value_counts(df1[&#39;Type 1&#39;], sort = True).sort_index()
+labels = [&#39;Bug&#39;, &#39;Dark&#39;, &#39;Dragon&#39;, &#39;Electric&#39;, &#39;Fariy&#39;, &#39;Fighting&#39;, &#39;Fire&#39;,
+        &#39;Flying&#39;, &#39;Ghost&#39;, &#39;Grass&#39;, &#39;Ground&#39;, &#39;Ice&#39;, &#39;Normal&#39;, &#39;Poison&#39;, &#39;Psychic&#39;,
+        &#39;Rock&#39;, &#39;Steel&#39;, &#39;Water&#39;]
+sizes = type_count
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels = labels, startangle=90)
+ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+plt.title(&#39;Number of Pokemon by type 1&#39;)
+#plt.savefig(&#39;pie8.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+
+
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data without legendaries&#39;, y = 1.05, size = 15)
+sns.heatmap(df1.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+plt.savefig(&#39;heat8.png&#39;, bbox_inches=&#39;tight&#39;)
+sns.plt.show()
+#color map looking at Pearson correlations
+colormap = plt.cm.plasma
+plt.figure(figsize=(16,12))
+plt.title(&#39;Pearson correlation of data with legendaries&#39;, y = 1.05, size = 15)
+sns.heatmap(pokemon.corr(), linewidths=0.1, vmax=1.0, square=True, cmap=colormap, linecolor=&#39;black&#39;, annot=True)
+sns.plt.show()
+#color map looking at Pearson correlations
+</pre></div>
+
+
+<h2>Histograms of data without legendaries</h2>
+<div class="codehilite"><pre><span></span>df1.hist()
+fig=plt.gcf()
+fig.set_size_inches(20,15)
+plt.savefig(&#39;hist8.png&#39;, bbox_inches=&#39;tight&#39;)
+plt.show()
+#histograms of the different stats to show if they have normal distribution
+</pre></div>
+
+
+<h1>Final Observation</h1>
+<p>Removing Legendries lowers a lot of our correlations and makes our distribution less normal. I think leaving legendries in will improve your chances of being able to predict type by stats.</p>
+<h3>Author</h3>
+<p>Justin Minsk - justin.minsk@gmail.com</p>
+</body>
+</html>
