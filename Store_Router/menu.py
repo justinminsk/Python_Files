@@ -1,16 +1,71 @@
-from kivy.app import App
-from kivy.uix.dropdown import DropDown
-from kivy.uix.boxlayout import BoxLayout
+from tkinter import *
+
+root = Tk()
 
 
-class CustomDropDown(BoxLayout):
-    pass
+def create_window():
+    window = Toplevel(root)
 
 
-class MainApp(App):
-    def build(self):
-        return CustomDropDown()
+frame = root
+var1 = IntVar()
+Checkbutton(frame, text="cheese", variable=var1).grid(row=0, sticky=W)
+var2 = IntVar()
+Checkbutton(frame, text="yogurt", variable=var2).grid(row=1, sticky=W)
+var3 = IntVar()
+Checkbutton(frame, text="milk", variable=var3).grid(row=2, sticky=W)
+var4 = IntVar()
+Checkbutton(frame, text="chicken", variable=var4).grid(row=3, sticky=W)
+var28 = IntVar()
+Checkbutton(frame, text="beef", variable=var28).grid(row=4, sticky=W)
+var5 = IntVar()
+Checkbutton(frame, text="pork", variable=var5).grid(row=0, column=2, sticky=W)
+var6 = IntVar()
+Checkbutton(frame, text="tv dinners", variable=var6).grid(row=1, column=2, sticky=W)
+var7 = IntVar()
+Checkbutton(frame, text="ice cream", variable=var7).grid(row=2, column=2, sticky=W)
+var8 = IntVar()
+Checkbutton(frame, text="waffles", variable=var8).grid(row=3, column=2, sticky=W)
+var9 = IntVar()
+Checkbutton(frame, text="cereal", variable=var9).grid(row=4, column=2, sticky=W)
+var10 = IntVar()
+Checkbutton(frame, text="coffee", variable=var10).grid(row=0, column=3, sticky=W)
+var11 = IntVar()
+Checkbutton(frame, text="tea", variable=var11).grid(row=1, column=3, sticky=W)
+var12 = IntVar()
+Checkbutton(frame, text="bread", variable=var12).grid(row=2, column=3, sticky=W)
+var13 = IntVar()
+Checkbutton(frame, text="cake", variable=var13).grid(row=3, column=3, sticky=W)
+var14 = IntVar()
+Checkbutton(frame, text="crackers", variable=var14).grid(row=4, column=3, sticky=W)
+var15 = IntVar()
+Checkbutton(frame, text="cookies", variable=var15).grid(row=0, column=4, sticky=W)
+var16 = IntVar()
+Checkbutton(frame, text="water", variable=var16).grid(row=1, column=4, sticky=W)
+var17 = IntVar()
+Checkbutton(frame, text="soda", variable=var17).grid(row=2, column=4, sticky=W)
+var18 = IntVar()
+Checkbutton(frame, text="juice", variable=var18).grid(row=3, column=4, sticky=W)
+var19 = IntVar()
+Checkbutton(frame, text="vegetables", variable=var19).grid(row=4, column=4, sticky=W)
+var20 = IntVar()
+Checkbutton(frame, text="fruit", variable=var20).grid(row=0, column=5, sticky=W)
+var21 = IntVar()
+Checkbutton(frame, text="salads", variable=var21).grid(row=1, column=5, sticky=W)
+var22 = IntVar()
+Checkbutton(frame, text="nuts", variable=var22).grid(row=2, column=5, sticky=W)
+var23 = IntVar()
+Checkbutton(frame, text="jam", variable=var23).grid(row=3, column=5, sticky=W)
+var24 = IntVar()
+Checkbutton(frame, text="peanut butter", variable=var24).grid(row=4, column=5, sticky=W)
+var25 = IntVar()
+Checkbutton(frame, text="paper towels", variable=var25).grid(row=0, column=6, sticky=W)
+var26 = IntVar()
+Checkbutton(frame, text="tooth paste", variable=var26).grid(row=1, column=6, sticky=W)
+var27 = IntVar()
+Checkbutton(frame, text="laundry detergent", variable=var27).grid(row=2, column=6, sticky=W)
+Button(frame, text="QUIT", fg="red", command=quit).grid(row=7, column=6, sticky=W)
+Button(frame, text="Confirm", fg="blue", command=create_window).grid(row=6, column=6, sticky=W)
 
-
-if __name__=='__main__':
-    MainApp().run()
+if __name__ == '__main__':
+    mainloop()

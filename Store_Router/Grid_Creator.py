@@ -3,7 +3,7 @@ def grid_name():
     Create a store array to use in the store router program. This creates the item name.
     """
     store_item = ['entrance', 'cheese', 'milk', 'yogurt', 'chicken', 'beef', 'pork', 'tv dinners', 'ice cream', 'waffles',
-                  'cereal', 'coffee', 'tea', 'bread', 'cake', 'crackers', 'cookies', 'water', 'soda', 'juice'
+                  'cereal', 'coffee', 'tea', 'bread', 'cake', 'crackers', 'cookies', 'water', 'soda', 'juice',
                   'vegetables', 'fruit', 'salads', 'nuts', 'jam', 'peanut butter', 'paper towels', 'tooth paste',
                   'laundry detergent']
     return store_item
