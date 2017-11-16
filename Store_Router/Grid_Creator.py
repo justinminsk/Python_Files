@@ -52,4 +52,5 @@ def grid():
 
 
 if __name__ == '__main__':
-    print(grid())
+    grid = grid()
+    print(grid[0])
