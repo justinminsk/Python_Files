@@ -151,18 +151,28 @@ class StoreRouter:
             else:
                 # Our Manhattan distance alg
                 index = 0
+                # Starting coordinate
                 coord1 = (0, 0)
+                # Break it into x and y
                 coord_x1 = coord1[0]
                 coord_y1 = coord1[1]
+                # Ending coordinate
                 coord2 = shopping_matrix[index]
+                # Break it into x and y
                 coord_x2 = coord2[0]
                 coord_y2 = coord2[1]
+                # See if x of end is equal to x of start
                 if coord_x2 == coord_x1:
+                    # If it is distance is a straight line use normal distance formula
                     distance = ((coord_x1 - coord_x2) ** 2 + (coord_y1 - coord_y2) ** 2) ** 0.5
                 else:
+                    # If start of y is greater than 4 then you should go to the top of the isle
                     if coord_y1 > 4:
+                        # Manhattan distance
                         distance = (10 - coord_y1) + abs(coord_x2 - coord_x1) + (10 - coord_y2)
+                        # If start of y is less than or equal to 4 the go to the bottom of the isle
                     if coord_y1 <= 4:
+                        # Manhattan distance
                         distance = coord_y1 + abs(coord_x2 - coord_x1) + coord_y2
                 if distance < smallest_distance:
                     # Change smallest distance to the smallest then make that item the next item
