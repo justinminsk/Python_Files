@@ -204,7 +204,7 @@ class StoreRouter:
                     else:
                         if coord_y1 > 4:
                             distance = (10 - coord_y1) + abs(coord_x2 - coord_x1) + (10 - coord_y2)
-                        if coord_y1 <= 4:
+                        elif coord_y1 <= 4:
                             distance = coord_y1 + abs(coord_x2 - coord_x1) + coord_y2
                     if distance < smallest_distance:
                         # Change smallest distance to the smallest then make that item the next item
