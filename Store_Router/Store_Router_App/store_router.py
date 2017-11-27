@@ -171,7 +171,7 @@ class StoreRouter:
                         # Manhattan distance
                         distance = (10 - coord_y1) + abs(coord_x2 - coord_x1) + (10 - coord_y2)
                         # If start of y is less than or equal to 4 the go to the bottom of the isle
-                    if coord_y1 <= 4:
+                    elif coord_y1 <= 4:
                         # Manhattan distance
                         distance = coord_y1 + abs(coord_x2 - coord_x1) + coord_y2
                 if distance < smallest_distance:
