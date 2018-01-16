@@ -98,4 +98,4 @@ def use_tsp_solver():
 
 
 if __name__ == '__main__':
-    print(tsp_greedy('grocer_list.txt'))
+    print(make_distance_matrix())

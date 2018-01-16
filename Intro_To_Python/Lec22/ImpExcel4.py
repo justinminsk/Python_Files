@@ -38,7 +38,7 @@ def makeSQL():
 def getData():
     dataframe = sqlite3.connect('baseball.db')
     df = dataframe.cursor()
-    df.execute('SELECT playerID FROM pitching WHERE W > 5')
+    df.execute('SELECT * FROM pitching WHERE playerID == "ruthba01"')
     for line in df.fetchall():
         print(line)
 
